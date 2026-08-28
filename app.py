@@ -58,7 +58,8 @@ if st.button("Teach the AI"):
             try:
                 ai_response = get_ai_student_response(
                     answer,
-                    st.session_state.challenge
+                    st.session_state.challenge,
+                    st.session_state.concept
                 )
 
                 st.success("The AI student responded:")

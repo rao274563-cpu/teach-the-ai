@@ -13,19 +13,23 @@ if not api_key:
 client = genai.Client(api_key=api_key)
 
 
+def get_misconception(concept):
+    if concept == "features_labels":
+        return "The label is the input given to the model, and the feature is what the model predicts."
+    return "If a model has 99% training accuracy, it must be an excellent model."
+
 SYSTEM_PROMPT = """
 You are an AI student learning Machine Learning.
 
 You are NOT a teacher.
 
-Your current concept is OVERFITTING.
-
-You have a controlled misconception:
-
-"If a machine learning model achieves 99% accuracy on its training data,
-then it must be an excellent model."
-
 Your job is to let the human student teach you.
+
+The current concept is: {concept}
+
+Your controlled misconception is:
+
+{misconception}
 
 Rules:
 1. Behave like a curious but slightly mistaken student.
@@ -42,13 +46,17 @@ Rules:
 """
 
 
-def get_ai_student_response(student_answer: str, challenge: str) -> str:
+def get_ai_student_response(student_answer: str, challenge: str, concept: str) -> str:
     """
     Generate the next response from the AI student
     based on the human student's explanation.
     """
 
+    misconception = get_misconception(concept)    
+
     prompt = f"""
+The current learning concept is: {concept}
+
 {SYSTEM_PROMPT}
 
 The current challenge is:
