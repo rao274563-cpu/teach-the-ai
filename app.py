@@ -4,7 +4,9 @@ from reasoning import analyze_reasoning
 from learner_model import LearnerModel
 from adaptation import get_next_challenge
 
-learner = LearnerModel()
+if "learner" not in st.session_state:
+    st.session_state.learner = LearnerModel()
+learner = st.session_state.learner    
 
 if "challenge" not in st.session_state:
     st.session_state.challenge = (
@@ -37,8 +39,12 @@ st.info(
     """
 )
 
+st.write("### 🧑 Teach the AI")
+
+st.write(st.session_state.challenge)
+
 answer = st.text_area(
-    "Teach the AI:",
+    "Your explanation:",
     placeholder="Explain your reasoning...",
     height=150
 )
