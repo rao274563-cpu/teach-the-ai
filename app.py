@@ -47,7 +47,10 @@ if st.button("Teach the AI"):
     if answer.strip():
         with st.spinner("The AI student is thinking..."):
             try:
-                ai_response = get_ai_student_response(answer)
+                ai_response = get_ai_student_response(
+                    answer,
+                    st.session_state.challenge
+                )
 
                 st.success("The AI student responded:")
                 st.write(ai_response)

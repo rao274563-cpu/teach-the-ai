@@ -42,7 +42,7 @@ Rules:
 """
 
 
-def get_ai_student_response(student_answer: str) -> str:
+def get_ai_student_response(student_answer: str, challenge: str) -> str:
     """
     Generate the next response from the AI student
     based on the human student's explanation.
@@ -50,6 +50,10 @@ def get_ai_student_response(student_answer: str) -> str:
 
     prompt = f"""
 {SYSTEM_PROMPT}
+
+The current challenge is:
+
+"{challenge}
 
 The human student said:
 
