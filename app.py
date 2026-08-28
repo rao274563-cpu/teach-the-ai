@@ -2,8 +2,15 @@ import streamlit as st
 from ai_student import get_ai_student_response
 from reasoning import analyze_reasoning
 from learner_model import LearnerModel
+from adaptation import get_next_challenge
 
 learner = LearnerModel()
+
+if "challenge" not in st.session_state:
+    st.session_state.challenge = (
+        "My model has 99% training accuracy, "
+        "so must be a very good model. Do you agree?"
+    )
 
 
 st.set_page_config(
@@ -23,11 +30,10 @@ st.write(
 )
 
 st.info(
-    """
+    f"""
     🤖 AI Student:
 
-    "My model has 99% training accuracy, so it must be a very good model.
-    Do you agree?"
+    "{st.session_state.challenge}"
     """
 )
 
@@ -79,6 +85,13 @@ if st.button("Teach the AI"):
                 st.subheader("📊 Learner State")
                 st.write(f"**Mastery:** {learner.mastery:.0f}/100")
                 st.write(f"**Level:** {learner.get_level()}")
+
+                challenge = get_next_challenge(learner.mastery)
+
+                st.session_state.challenge = challenge
+                
+                st.subheader("🎯 Next Challenge")
+                st.write(challenge)
 
             except Exception as e:
                 st.error("Something went wrong while contacting the AI student.")
