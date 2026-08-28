@@ -6,7 +6,10 @@ from adaptation import get_next_challenge
 
 if "learner" not in st.session_state:
     st.session_state.learner = LearnerModel()
-learner = st.session_state.learner    
+learner = st.session_state.learner 
+
+if "concept" not in st.session_state:
+    st.session_state.concept = "overfitting"
 
 if "challenge" not in st.session_state:
     st.session_state.challenge = (
@@ -95,7 +98,14 @@ if st.button("Teach the AI"):
                 st.write(f"**Mastery:** {learner.mastery:.0f}/100")
                 st.write(f"**Level:** {learner.get_level()}")
 
-                challenge = get_next_challenge(learner.mastery)
+                if learner.mastery >= 90 and st.session_state.concept == "overfitting":
+                    st.session_state.concept = "features_labels"
+                    learner.mastery = 0
+
+                challenge = get_next_challenge(
+                    learner.mastery,
+                    st.session_state.concept
+                )
 
                 st.session_state.challenge = challenge
                 
