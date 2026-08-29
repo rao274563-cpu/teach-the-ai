@@ -1,4 +1,5 @@
 def get_next_challenge(mastery, concept="overfitting"):
+
     if concept == "features_labels":
         if mastery < 50:
             return "Which one is the input to a machine learning model: a feature or a label?"
@@ -11,7 +12,21 @@ def get_next_challenge(mastery, concept="overfitting"):
                    "Which is the feature and which is the label? Explain why?"
 
         else:
-            return "You are ready for the next"
+            return "You are ready for the next concept."
+
+    if concept == "training_testing":
+        if mastery < 50:
+            return "Why do we test a machine  learning model on a data it has not seen during training?"
+
+        elif mastery < 75:
+            return "Explain the difference between training data and testing data?"
+
+        elif mastery < 90:
+            return "A model perform very well on training data but poorly on test data. What does this tell you?"
+
+        else:
+            return "You are ready for the next concept."
+        
 
     if mastery < 50:
         return "Explain why training accuracy alone can be misleading."

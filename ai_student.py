@@ -14,8 +14,12 @@ client = genai.Client(api_key=api_key)
 
 
 def get_misconception(concept):
+
     if concept == "features_labels":
         return "The label is the input given to the model, and the feature is what the model predicts."
+
+    if concept == "training_testing":
+        return "We can evaluate a model on the same data used for training because that tells us that how accurate the model is."
     return "If a model has 99% training accuracy, it must be an excellent model."
 
 SYSTEM_PROMPT = """
