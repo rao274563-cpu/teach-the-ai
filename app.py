@@ -107,6 +107,10 @@ if st.button("Teach the AI"):
                     st.session_state.concept = "training_testing"
                     learner.mastery = 0
 
+                if learner.mastery >= 90 and st.session_state.concept == "training_testing":
+                    st.session_state.concept = "model_evaluation"
+                    learner.mastery = 0    
+
                 challenge = get_next_challenge(
                     learner.mastery,
                     st.session_state.concept

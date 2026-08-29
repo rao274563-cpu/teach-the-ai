@@ -20,6 +20,10 @@ def get_misconception(concept):
 
     if concept == "training_testing":
         return "We can evaluate a model on the same data used for training because that tells us that how accurate the model is."
+
+    if concept == "model_evaluation":
+        return "Accuracy is always enough to determine whether a classification model is good."
+    
     return "If a model has 99% training accuracy, it must be an excellent model."
 
 SYSTEM_PROMPT = """

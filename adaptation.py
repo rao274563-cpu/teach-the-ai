@@ -26,7 +26,19 @@ def get_next_challenge(mastery, concept="overfitting"):
 
         else:
             return "You are ready for the next concept."
-        
+
+    if concept == "model_evaluation":
+        if mastery < 50:
+            return "Is accuracy always enough to decide whether classificarion model is good?"
+
+        elif mastery < 75:
+            return "Why might we use metrics other that accuracy to evaluate a classification model?" 
+
+        elif mastery < 90:
+            return "A model has 95% accuracy but performs poorly on the minority class. Is accuracy enough? Wxplain why."   
+
+        else:
+            return "You have completed the machine learning path."
 
     if mastery < 50:
         return "Explain why training accuracy alone can be misleading."
