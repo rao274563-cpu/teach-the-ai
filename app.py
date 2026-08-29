@@ -42,9 +42,6 @@ st.info(
     """
 )
 
-st.write("### 🧑 Teach the AI")
-
-st.write(st.session_state.challenge)
 
 answer = st.text_area(
     "Your explanation:",
@@ -95,10 +92,6 @@ if st.button("Teach the AI"):
                     f"**Feedback:** {reasoning_result['feedback']}"
                 )
 
-                st.subheader("📊 Learner State")
-                st.write(f"**Mastery:** {learner.mastery:.0f}/100")
-                st.write(f"**Level:** {learner.get_level()}")
-
                 if learner.mastery >= 90 and st.session_state.concept == "overfitting":
                     st.session_state.concept = "features_labels"
                     learner.mastery = 0
@@ -110,6 +103,10 @@ if st.button("Teach the AI"):
                 if learner.mastery >= 90 and st.session_state.concept == "training_testing":
                     st.session_state.concept = "model_evaluation"
                     learner.mastery = 0    
+
+                st.subheader("📊 Learner State")  
+                st.write(f"**Mastery:** {learner.mastery:.0f}/100")
+                st.write(f"**Level:** {learner.get_level()}")  
 
                 challenge = get_next_challenge(
                     learner.mastery,
